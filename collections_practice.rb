@@ -34,13 +34,52 @@ def count_elements(array)
 end
 
 def merge_data(keys, data)
-  keys.merge(data) {|k, x, y| x + y}
+  newArray = []
+  key1 = {}
+  kVal = ""
+  key2 = {}
+  dVal = ""
+  keys.each {|kValues|
+    key1 = kValues
+    h = Hash.new
+    kValues.each {|k,v|
+      kVal = v
+      data.each {|dValues|
+        dValues.each {|k,v|
+          dVal = k
+          key2 = v
+          if (kVal == dVal)
+            h = key1.merge(key2)
+          end
+        }
+      }
+    }
+    newArray << h
+  }
+  newArray
 end
 
 def find_cool(cool)
-  cool.each {|key, value|
-    if value == "cool"
-      return key
+  newArray = []
+  index = 0;
+  cool.each {|values|
+    if values.has_value?("cool")
+      newArray << cool[index]
     end
-  }  
+    index += 1
+  }
+  newArray
+end
+
+def organize_schools(schools)
+  h = Hash.new() 
+  schools.each {|school|
+    loc = school[1].flatten.pop
+    if !h.has_key?(loc)
+      h[loc] = [school[0]]
+    else
+      h[loc] << school[0]
+    end
+  }
+  h
 end
