@@ -40,26 +40,26 @@ def count_elements (ting)
   return ting
 end
 
-def merge_data (data_nest, data_nest1)
-  data_nest1.each do |hash|
-    hash.each do |name, info|
-      data_nest.each do |other_info|
-        if other_info.has_value?(name)
-          info.each do |key, value|
-          other_info[key] = value
+def merge_data (data_nest, data_nest1) #I had a hard time with this one. I piggybacked off of others works to get here.
+  data_nest1.each do |hash| #start by iterating through the hash with additional info that we want to add to data_nest
+    hash.each do |name, info| #iterate through it to create variables we can use to move the info while iterating through data_nest
+      data_nest.each do |other_info| #iterate through data_nest we want to add to so we can add to the correct level of the nest
+        if other_info.has_value?(name) #selecting the nested hash that correspends with info from the additional nest we want to add.
+          info.each do |key, value| #iterating through the hash with the additional info we want to add.
+          other_info[key] = value #adding the value from the additional nest to our original nest.
           end
         end
       end
     end
-  return data_nest
+  return data_nest #outputing the nest
   end
 end
 
 def find_cool (ting)
   output_arr = []
-  ting.each_with_index do |hash, i|
-    if hash.has_value?("cool")
-      output_arr << ting[i]
+  ting.each_with_index do |hash, i| #iterating through the thing we want to add to.
+    if hash.has_value?("cool") #selecting the value that corresponds with the hash we want to output
+      output_arr << ting[i] #shoveling the hash into the output object.
     end
   end
   return output_arr
@@ -67,12 +67,12 @@ end
 
 def organize_schools (schools)
   output_hash = {}
-  schools.each do |school, loc_hash|
-    loc_hash.each do |loc, city|
-      if output_hash.has_key?(city)
-        output_hash[city].push school
+  schools.each do |school, loc_hash| #iterating through the original hash to get to the level that contains city names. also saves keys(school names) as variables to be called on later.
+    loc_hash.each do |loc, city| #iterating through city names.
+      if output_hash.has_key?(city)#checking for cityies that are already included in the output hash.
+        output_hash[city].push school #adding school names to city hashes that already exist.
       else
-      output_hash[city] = [school]
+      output_hash[city] = [school] #adding city hashes and school names to output that dont exist in output yet.
 
 end
 end
